@@ -1,0 +1,120 @@
+{include file="common/head"/}
+<div class="admin-main layui-anim layui-anim-upbit">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>{$title}</legend>
+    </fieldset>
+    <blockquote class="layui-elem-quote">
+        <a href="{:url('add')}" class="layui-btn layui-btn-small">{:lang('add')}目录</a>
+    </blockquote>
+
+    <table class="layui-hide" id="menu" >
+        {{#  layui.each(d.menus, function(index, menu){ }}
+            <tr>
+              <td>{{ menu.id }}</td>
+              <td>{{ menu.pid }}：</td>
+              <td>{{ menu.title }}</td>
+              <td>{{ menu.sort }}</td>
+              <td>{{ menu.status }}</td>
+            </li>
+        {{#  }); }}
+    </table>
+
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+</div>
+{include file="common/foot"/}
+<script src="__STATIC__/common/js/jquery.2.1.1.min.js"></script>
+<script>
+    var menus = {$menus};
+    layui.use('table', function(){
+        var table = layui.table,$= layui.jquery;
+        table.init('list', {});
+
+        //执行一个 table 实例
+        // var tableIn = table.render({
+        //     elem: '#menu'
+        //     ,page: true //开启分页
+        //     ,cols: [[ //表头
+        //         {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'},
+        //         {field: 'pid', title: 'PID', width:80, sort: true, fixed: 'left'},
+        //         {field: 'title', title: '用户名', width:250},
+        //         {field: 'menustatus', align: 'center',title: '{:lang("status")}', width: 80,toolbar: '#status'},
+        //     ]],
+        //     data:menus
+        // });
+
+        // $('body').on('blur','.list_order',function() {
+        //     var id = $(this).attr('data-id');
+        //     var listorder = $(this).val();
+        //     var loading = layer.load(1, {shade: [0.1, '#fff']});
+        //     $.post('{:url("cOrder")}',{id:id,listorder:listorder},function(res){
+        //         layer.close(loading);
+        //         if(res.code === 1){
+        //             layer.msg(res.msg, {time: 1000, icon: 1}, function () {
+        //                 location.href = res.url;
+        //             });
+        //         }else{
+        //             layer.msg(res.msg,{time:1000,icon:2});
+        //         }
+        //     })
+        // });
+
+        table.on('tool(list)', function(obj) {
+            var data = obj.data;
+            if (obj.event === 'status') {
+                var loading = layer.load(1, {shade: [0.1, '#fff']});
+                $.post('{:url("moduleState")}', {'id': data.id}, function (res) {
+                    layer.close(loading);
+                    if (res.status == 1) {
+                        if (res.moduleState == 1) {
+                            obj.update({
+                                status: '<a class="layui-btn layui-btn-warm layui-btn-mini" lay-event="status">开启</a>'
+                            });
+                        } else {
+                            obj.update({
+                                status: '<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="status">禁用</a>'
+                            });
+                        }
+                    } else {
+                        layer.msg('操作失败！', {time: 1000, icon: 2});
+                        return false;
+                    }
+                })
+            }else if(obj.event === 'del'){
+                layer.confirm('你确定要删除该模型吗？', {icon: 3}, function (index) {
+                    $.post("{:url('del')}",{id:data.id},function(res){
+                        if(res.code==1){
+                            layer.msg(res.msg,{time:1000,icon:1});
+                            tableIn.reload();
+                        }else{
+                            layer.msg(res.msg,{time:1000,icon:2});
+                        }
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+    });
+
+
+
+
+    function del(id) {
+        layer.confirm('你确定要删除该栏目及其子栏目吗？', {icon: 3}, function (index) {
+            $.post('{:url("del")}', {id: id}, function (data) {
+                if (data.status === 1) {
+                    layer.alert(data.info, {icon: 6}, function(index){
+                        layer.close(index);
+                        window.location.href=data.url;
+                    });
+                }else{
+                    layer.msg(data.info,{icon:5});
+                }
+            });
+            layer.close(index);
+        });
+    }
+</script>

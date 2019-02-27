@@ -1,0 +1,3 @@
+thinkphp 5.0.11
+
+composer require topthink/think-captcha
