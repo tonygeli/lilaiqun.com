@@ -166,7 +166,12 @@ class Form{
             $str .='<input type="hidden" id="editType" value="1">';
             $str .='<textarea name="'.$field.'" class="'.$info['class'].'" id="'.$info['class'].'">'.$value.'</textarea>';
             $str .='<script>var editor = new UE.ui.Editor();editor.render("'.$info['class'].'");</script>';
-        }else{
+        } elseif ($info['setup']['edittype']=='editormd') {
+            $str ='';
+            $str .='<input type="hidden" id="editType" value="2">';
+            $str .='<textarea name="'.$field.'" class="'.$info['class'].'" id="'.$info['class'].'">'.$value.'</textarea>';
+            $str .='<script>var editor = editormd("box_'.$field.'", {path : "__STATIC__/editormd/lib/",height: 560,sequenceDiagram: false,flowChart: false,});</script>';
+        } else {
             $str ='';
             $str .='<input type="hidden" id="editType" value="0">';
             if($value){

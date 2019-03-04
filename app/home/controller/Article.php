@@ -1,11 +1,15 @@
 <?php
 namespace app\home\controller;
-class Index extends Common{
+
+class Article extends Common
+{
     public function _initialize(){
         parent::_initialize();
+        $this->dao=db('article');
     }
-    public function index(){
-        $recommends = db('article')->where('recommend',1)->select();
+
+    public function list(){
+
         return $this->fetch();
     }
 }

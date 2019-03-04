@@ -1,5 +1,6 @@
 .idea/*
 .vscode/*
 /vendor
+/runtime
 /runtime/log
 /runtime/temp
