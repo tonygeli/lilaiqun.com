@@ -1,10 +1,69 @@
 <?php
 namespace app\admin\controller;
 use think\Db;
+use think\Config;
 use think\Request;
 use think\Controller;
+// 引入鉴权类
+use Qiniu\Auth;
+// 引入上传类
+use Qiniu\Storage\UploadManager;
+use Qiniu\Storage\BucketManager;
+
 class UpFiles extends Common
 {
+    public function uploadQiniu() {
+        $articleId = input('id');
+
+        $accessKey = Config::get('QINIU_ACCESS_KEY');
+        $secretKey = Config::get('QINIU_SECRET_KEY');
+        $bucket = Config::get('QINIU_BUCKET');
+
+        // 构建鉴权对象
+        $auth = new Auth($accessKey, $secretKey);
+        $bucketManager = new BucketManager($auth);
+
+        $info = db('article')->where('id', $articleId)->find();
+        if ($info['thumb']) {
+            $err = $bucketManager->delete($bucket, $info['thumb']);
+            if ($err !== null && $err->code() != 612) {
+                // 上传失败获取错误信息
+                return [
+                  'code' => $err->code(),
+                  'info' => $err->message(),
+                  'url' => ''
+                ];
+            }
+        }
+
+        // 生成上传 Token
+        $token = $auth->uploadToken($bucket);
+
+        // 要上传文件的本地路径
+        $filePath = request()->file()['file']->getRealPath();
+
+        // 初始化 UploadManager 对象
+        $uploadMgr = new UploadManager();
+
+        // 上传到七牛后保存的文件名
+        $key = "article/{$articleId}/thumb".date('YmdHis').".png";
+
+        // 调用 UploadManager 的 putFile 方法进行文件的上传。
+        list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
+        if ($err !== null) {
+            // 上传失败获取错误信息
+            $result['code'] = $err->code();
+            $result['info'] = $err->message();
+            $result['url'] = '';
+        } else {
+            db('article')->where("id={$articleId}")->setField('thumb', $key);
+            $result['code'] = 0;
+            $result['info'] = '图片上传成功!';
+            $result['url'] = Config::get('url_image').$ret['key'];
+        }
+        return $result;
+    }
+
     public function upload(){
         // 获取上传文件表单字段名
         $fileKey = array_keys(request()->file());

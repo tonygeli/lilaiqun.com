@@ -101,6 +101,8 @@ return [
     'url_domain_deploy'      => false,
     // 域名根，如thinkphp.cn
     'url_domain_root'        => 'www.lilaiqun.com',
+    // image cdn
+    'url_image'              => 'http://images.lilaiqun.com/',
     // 是否自动转换URL中的控制器和操作名
     'url_convert'            => false,
     // 默认的访问控制器层

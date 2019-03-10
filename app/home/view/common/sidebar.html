@@ -1,0 +1,50 @@
+<aside class="sidebar">
+    <style>
+        .warps {
+            width:330px;
+            height:180px;
+            margin-bottom:15px;
+            padding:10px;
+        }
+        .contents {
+            width:300px;
+            height:160px;
+            margin:0px auto;
+            padding:30px 30px;
+            background:rgba(38, 38, 38, 0.6)!important;
+            filter:Alpha(opacity=60);
+            background:#000;
+        }
+
+        .contents p {
+            font-weight:bold;
+            position:relative;
+            color:#fff;
+            font-size:18px;
+            line-height:30px;
+            text-align:center;
+            margin-top:20px;
+        }
+        .contents{ text-align:center}
+        .siatime{ font-size:12px; color:#CCC}
+    </style>
+
+    <div class="warps" style="background:url(http://images.lilaiqun.com/share.jpeg) no-repeat left top; background-size:100%">
+        <div class="contents"><a href="http://www.lilaiqun.com/resources" target="_blank" title="IT学习资源分享">
+            <p>IT学习资源分享</p>
+            <span class="siatime">Python PHP MySql</span>
+        </a></div>
+    </div>
+
+    <div class="widget widget_ui_tags">
+        <h3>友情链接<span class="w_title">Friend Link</span></h3>
+        <div class="items">
+            <ul>
+            {volist name="linkList" id="vo"}
+            <li><a href="{$vo.url}" rel="external" title="{$vo.name}">{$vo.name}</a></li>
+            {/volist}
+            </ul>
+        </div>
+    </div>
+
+</aside>

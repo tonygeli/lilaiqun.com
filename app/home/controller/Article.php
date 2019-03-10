@@ -8,8 +8,7 @@ class Article extends Common
         $this->dao=db('article');
     }
 
-    public function list(){
-
+    public function index() {
         return $this->fetch();
     }
 }

@@ -51,6 +51,7 @@ class Form{
         $info['setup']=is_array($info['setup']) ? $info['setup'] : string2array($info['setup']);
         $style=$info['setup']['style'];
         $thumb=$info['setup']['thumb'];
+        $thumbPath = !empty($info['setup']['thumbPath']) ? $info['setup']['thumbPath'] : __PUBLIC__;
         $field = $info['field'];
         $name = $info['name'];
         $value = $value ? $value : $this->data[$field];
@@ -67,7 +68,7 @@ class Form{
             }
         }
         $boldchecked= $style_bold=='bold' ? 'checked' : '';
-        $titleThumb =$title_thumb?__PUBLIC__.$title_thumb:"__ADMIN__/images/tong.png";
+        $titleThumb =$title_thumb?$thumbPath.$title_thumb:"__ADMIN__/images/tong.png";
         if(empty($info['setup']['upload_maxsize'])){
             $info['setup']['upload_maxsize'] =  intval(byte_format(config('attach_maxsize')));
         }

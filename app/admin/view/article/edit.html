@@ -21,7 +21,7 @@
         <legend>{$title}</legend>
     </fieldset>
     <form class="layui-form" method="post">
-        {if condition="$info['id'] neq ''"}<input TYPE="hidden" name="id" value="{$info.id}">{/if}
+        {if condition="$info['id'] neq ''"}<input TYPE="hidden" name="id" id="articleId" value="{$info.id}">{/if}
         {volist name="fields" id="r"}
         {if condition="!empty($r['status'])"}
         <div class="layui-form-item">
@@ -59,24 +59,28 @@
 <script>
 
     var thumb,pic,file;
+    var articleId = $('#articleId').val();
     {if condition="ACTION_NAME=='add'"}
     var url= "{:url('insert')}";
     {else /}
-        var url= "{:url('update')}";
+        // var url= "{:url('updateQiniu')}";
         {/if}
 
             layui.use(['form','upload','layedit','laydate'], function () {
                 var form = layui.form,upload = layui.upload,layedit = layui.layedit,laydate = layui.laydate;
                 //缩略图上传
                 upload.render({
-                    elem: '#thumbBtn'
-                    ,url: '{:url("UpFiles/upload")}'
-                    ,accept: 'images' //普通文件
-                    ,exts: 'jpg|png|gif' //只允许上传压缩文件
-                    ,done: function(res){
+                    elem: '#thumbBtn',
+                    url: '{:url("UpFiles/uploadQiniu")}',
+                    accept: 'images', //普通文件,
+                    exts: 'jpg|png|gif|jpeg', //只允许上传压缩文件
+                    data: {id: articleId},
+                    done: function(res){
+                        if (res.code == 0) {
+                            $('#cltThumb').attr('src', res.url);
+                            $('#thumb').val(res.url);
+                        }
                         console.log(res);
-                        $('#cltThumb').attr('src', "__PUBLIC__"+res.url);
-                        $('#thumb').val(res.url);
                     }
                 });
                 //多图片上传
