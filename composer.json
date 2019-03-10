@@ -1,5 +1,6 @@
 {
     "require": {
-        "topthink/think-captcha": "1.*"
+        "topthink/think-captcha": "1.*",
+        "qiniu/php-sdk": "^7.2"
     }
 }
