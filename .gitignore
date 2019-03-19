@@ -7,3 +7,4 @@
 /runtime/cache
 /runtime/Data
 composer.json
+/app/database.php
