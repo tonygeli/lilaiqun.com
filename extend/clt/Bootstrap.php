@@ -143,20 +143,21 @@ class Bootstrap extends Paginator
                 );
             } else {
                 $btn_cfg=Config::get('paginate.page_button');
-                $btn_str='<ul class="pagination">';
+                $btn_str='<div class="pagination"><ul>';
                 $btn_str.=$btn_cfg['total_rows']?'%s1':'';
                 $btn_str.=$btn_cfg['first_page']?'%s2':'';
                 $btn_str.=$btn_cfg['turn_page']?'%s3':'';
                 $btn_str.='%s4';
                 $btn_str.=$btn_cfg['turn_page']?'%s5':'';
                 $btn_str.=$btn_cfg['last_page']?'%s6':'';
+                $btn_str.='</div>';
 
                 $page_str=str_replace(array('%s1','%s2','%s3','%s4','%s5','%s6'),array($this->getTotal(),$this->getFirstButton(),$this->getPreviousButton(),$this->getLinks(),$this->getNextButton(),$this->getLastButton()),$btn_str);
                 return $page_str;
             }
         }else{
             return sprintf(
-                '<ul class="pagination">%s</ul>',
+                '<div class="pagination"><ul>%s</ul></div>',
                 $this->getTotal()
             );
         }

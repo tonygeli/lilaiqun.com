@@ -20,7 +20,6 @@ class Article extends Model
             'setup' => array (
                 'thumb' => '1',
                 'thumbPath' => 'http://images.lilaiqun.com/',
-                'style' => '1',
                 'size' => '55',
             ),
             'ispost' => 1,

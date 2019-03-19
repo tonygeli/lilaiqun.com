@@ -63,7 +63,7 @@
     {if condition="ACTION_NAME=='add'"}
     var url= "{:url('insert')}";
     {else /}
-        // var url= "{:url('updateQiniu')}";
+        var url= "{:url('update')}";
         {/if}
 
             layui.use(['form','upload','layedit','laydate'], function () {

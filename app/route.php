@@ -21,6 +21,9 @@ return [
     ],
     'index' => 'home/index/index',
 
+    'article/:id' => 'home/article/info',
+    'category/:id' => 'home/category/info',
+    'resource' => 'home/resource/index',
     'news/:catId' => 'home/news/index',
     'newsInfo/:id/:catId' => 'home/news/info',
 

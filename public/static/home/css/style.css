@@ -2732,9 +2732,6 @@ form#comment-form .buttoncontact, form#contactform .buttoncontact {width:40%;}
 .error-search {display:none;}
 .error-mobile .four {text-align:center;}
 }
-.pagination{list-style: none;}
-.pagination li{ float: left;padding: 8px 15px;}
-.pagination .active{background: #fff;}
 .user{clear: both;background: #000;}
 .user #top-social{width: 1024px;margin: 0 auto;float: none;padding: 0 15px;}
 .user #top-social ul li{margin-bottom: 0;height: 35px;line-height: 35px;}

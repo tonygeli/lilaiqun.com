@@ -12,13 +12,13 @@
                     {volist name="$recommends" id="rec"}
                     <li>
                         <div class="thumbnail">
-                            <a href="/home/article/index/{$rec['id']}" title="{$rec['title']}">
+                            <a href="/article-{$rec['id']}" title="{$rec['title']}">
                                 <?php if ($post['thumb']) $imgurl=$url_image.$post['thumb']; else $imgurl='/public/static/home/img/default.jpeg';?>
                                 <img src="{$imgurl}" alt="{$rec['title']}"/>
                             </a>
                         </div>
-                        <h4><a href="/home/article/index/{$rec['id']}" title="{$rec['title']}">{$rec['title']}</a></h4>
-                        <p>{$rec['description']}</p>
+                        <h4><a href="/article-{$rec['id']}" title="{$rec['title']}">{$rec['title']}</a></h4>
+                        <p class="desc">{$rec['description']}</p>
                     </li>
                     {/volist}
                 </ul>
@@ -32,22 +32,23 @@
             {volist name="$posts" id="post"}
             <article class="excerpt excerpt-1">
                 <div class="focus thumb">
-                    <a href="/home/article/index/{$post['id']}" title="{$post['title']}">
+                    <a href="/article-{$post['id']}" title="{$post['title']}">
                         <?php if ($post['thumb']) $imgurl=$url_image.$post['thumb']; else $imgurl='/public/static/home/img/default.jpeg';?>
                         <img src="{$imgurl}" alt="{$post['title']}">
                     </a>
                 </div>
                 <header>
                     <h2>
-                        <a href="/home/article/index/{$post['id']}" title="{$post['title']}">{$post['title']}</a>
+                        <a href="/article-{$post['id']}" title="{$post['title']}">{$post['title']}</a>
                     </h2>
                     <p class="note">{$rec['description']}</p>
                     <p class="meta">
-                        <a href="/home/category/index/{$catid}" rel="category">
+                        <a href="/category-{$catid}" rel="category">
                             <?php echo $catName ?></a><span class="pvs"> |</span><time><?php echo substr($post['time'], 0, 10) ?></time><span class="pv">阅读({$post['hits']+100})</span><span class="pvtags"></span></p>
                 </header>
             </article>
             {/volist}
+            {$page}
         </div>
     </div>
     {include file="common/sidebar"/}

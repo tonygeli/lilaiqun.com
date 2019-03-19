@@ -137,22 +137,6 @@ outline:0;
 
 
 /***** Lists *****/
-ul,ol {
-margin:0 0 20px;
-}
-
-ul {
-list-style:none outside;
-}
-
-ol {
-list-style:decimal;
-}
-
-ol,ul.square,ul.circle,ul.disc {
-margin-left:15px;
-}
-
 ul.square {
 list-style:square outside;
 }
