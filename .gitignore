@@ -7,3 +7,4 @@
 /runtime/cache
 /runtime/Data
 /app/database.php
+/app/config.php
