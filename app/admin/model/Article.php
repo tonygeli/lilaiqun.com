@@ -28,6 +28,13 @@ class Article extends Model
             'status' => 1,
             'issystem' => 1,
         ),
+        'inputthumb' => array(
+            'field' => 'inputthumb',
+            'name' => '缩略图',
+            'required' => 0,
+            'type' => 'inputthumb',
+            'status' => 1
+        ),
         'descriptino' => array (
             'id' => 4,
             'moduleid' => 1,

@@ -104,6 +104,14 @@ class Form{
         return $parseStr;
     }
 
+    public function inputthumb($info, $value) {
+        $field = $info['field'];
+        $name = $info['name'];
+        $value = $this->data[$field];
+        $parseStr = '<input type="text" name="'.$field.'" data-required="'.$info['required'].'" value="'.$value.'" data-min="'.$info['minlength'].'" data-max="'.$info['maxlength'].'" data-errormsg="'.$info['errormsg'].'" title="'.$name.'" placeholder="请输入'.$name.'" lay-verify="defau" class="'.$info['class'].' layui-input"/> ';
+        return $parseStr;
+    }
+
     public function text($info,$value){
         $info['setup']=is_array($info['setup']) ? $info['setup'] : string2array($info['setup']);
         $field = $info['field'];

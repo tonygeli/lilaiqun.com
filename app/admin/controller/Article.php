@@ -64,27 +64,19 @@ class Article extends Common
      * @return array|mixed
      */
     public function edit(){
-        if(request()->isPost()){
-            $data = input('post.');
-            if($this->dao->update($data)!==false){
-                return array('code'=>1,'url'=>url('index'),'msg'=>'修改成功!');
-            }else{
-                return array('code'=>0,'url'=>url('index'),'msg'=>'修改失败!');
-            }
-        }else{
-            $id = input('id');
-            $info = $this->dao->where('id',$id)->find();
-            $form=new Form($info);
-            $returnData['vo'] = $info;
-            $returnData['form'] = $form;
+        $id = input('id');
+        $info = $this->dao->where('id',$id)->find();
+        $info['inputthumb'] = $info['thumb'];
+        $form=new Form($info);
+        $returnData['vo'] = $info;
+        $returnData['form'] = $form;
 
-            $this->assign ('fields',MArticle::FIELDS);
-            $this->assign ('info', $info );
-            $this->assign ( 'form', $form );
-            $this->assign ( 'title', lang('edit').lang('article'));
+        $this->assign ('fields',MArticle::FIELDS);
+        $this->assign ('info', $info );
+        $this->assign ( 'form', $form );
+        $this->assign ( 'title', lang('edit').lang('article'));
 
-            return $this->fetch('edit');
-        }
+        return $this->fetch('edit');
     }
 
     /**
@@ -167,6 +159,10 @@ class Article extends Common
     public function update() {
         if(request()->isPost()) {
             $data = input('post.');
+            // 输入缩略图
+            if ($data['inputthumb']) {
+                $data['thumb'] = $data['inputthumb'];
+            }
             if ($this->dao->update($data) !== false) {
                 return array('code' => 1, 'url' => url('index'), 'msg' => '修改成功!');
             } else {
