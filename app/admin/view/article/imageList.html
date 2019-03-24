@@ -1,0 +1,90 @@
+{include file="common/head"/}
+
+<div class="admin-main layui-anim layui-anim-upbit">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>{:lang('module')}{:lang('list')}</legend>
+    </fieldset>
+    <blockquote class="layui-elem-quote">
+        <a href="{:url('add')}" class="layui-btn layui-btn-small">{:lang('add')}{:lang('article')}</a>
+    </blockquote>
+    <table class="layui-table" id="list2" lay-filter="list">
+        <thead>
+            <th>key</th>
+            <th>mineType</th>
+            <th>生成时间</th>
+        </thead>
+    </table>
+</div>
+{include file="common/foot"/}
+
+<script>
+    var qiniuMarker = ''
+    // nS 纳秒
+    function getLocalTime(nS) {
+        return new Date(parseInt(nS/(10000))).toLocaleString();
+    }
+    layui.use(['table'], function() {
+        var table = layui.table, $ = layui.jquery;
+        let ths = this;
+        ths.mark = ''
+        console.log(ths)
+        var tableIn = table.render({
+            elem: '#list',
+            url: '{:url("imageList")}',
+            method: 'post',
+            where: {
+                marker: ths.mark,
+                limit: 10
+            },
+            limit: 10,
+            page:true,
+            cols: [[
+                {field: 'key', title: 'key', width:200, fixed: true},
+                {field: 'mimeType', title: '{:lang("mimeType")}', width: 150},
+                {field: 'putTime', title: '{:lang("createTime")}', width: 200, templet : "<div>{{getLocalTime(d.putTime)}}</div>"},
+                {field: 'status', align: 'center',title: '{:lang("status")}', width: 80,toolbar: '#status'},
+                {width: 200, align: 'center', toolbar: '#action'}
+            ]],
+            done: function(res, curr, count) {
+                //如果是异步请求数据方式，res即为你接口返回的信息。
+                ths.mark = res.marker;
+                console.log(ths)
+            }
+        });
+        table.on('tool(list)', function(obj) {
+            var data = obj.data;
+            if (obj.event === 'status') {
+                var loading = layer.load(1, {shade: [0.1, '#fff']});
+                $.post('{:url("switchState")}', {'id': data.id}, function (res) {
+                    layer.close(loading);
+                    if (res.code == 0) {
+                        if (res.data.status == 1) {
+                            obj.update({
+                                status: '<a class="layui-btn layui-btn-warm layui-btn-mini" lay-event="status">开启</a>'
+                            });
+                        } else {
+                            obj.update({
+                                status: '<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="status">禁用</a>'
+                            });
+                        }
+                    } else {
+                        layer.msg('操作失败！', {time: 1000, icon: 2});
+                        return false;
+                    }
+                })
+            }else if(obj.event === 'del'){
+                layer.confirm('你确定要删除该文章吗？', {icon: 3}, function (index) {
+                    $.post("{:url('del')}",{id:data.id},function(res){
+                        if(res.code==0){
+                            layer.msg(res.msg,{time:1000,icon:1});
+                            tableIn.reload();
+                        }else{
+                            layer.msg(res.msg,{time:1000,icon:2});
+                        }
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+    })
+</script>

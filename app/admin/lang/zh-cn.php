@@ -68,6 +68,7 @@ return [
     'address'=>'地址',
     'content'=>'内容',
     'time'=>'时间',
+    'createTime'=>'生成时间',
     'title'=>'标题',
 
     'article' => '文章',

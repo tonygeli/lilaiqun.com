@@ -5,6 +5,7 @@ use think\Controller;
 use think\Db;
 use think\Input;
 use clt\Form;
+use clt\Qiniu;
 use think\Request;
 use app\admin\model\Article as MArticle;
 
@@ -233,4 +234,33 @@ class Article extends Common
         return $post;
     }
 
+    /*****************************************  文章图片管理  *************************************************/
+    public function image()
+    {
+        return $this->fetch('imageList');
+    }
+
+    public function imageList()
+    {
+        $qiniuSer = new Qiniu();
+        $arImg = $qiniuSer->getBucketFileList(input('prefix'), input('marker'), input('limit'));
+        $count = input('limit');
+        if (count($arImg['items']) == $count) {
+            $count++;
+        }
+        return $result = [
+            'code' => 0,
+            'msg' => '获取成功!',
+            'data' => $arImg['items'],
+            'count' => $count,
+            'marker' => $arImg['marker'],
+            'commonPrefixes' => $arImg['commonPrefixes'],
+            'rel'=>1
+        ];
+    }
+
+    public function moveImage()
+    {
+
+    }
 }

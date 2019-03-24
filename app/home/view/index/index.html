@@ -13,7 +13,7 @@
                     <li>
                         <div class="thumbnail">
                             <a href="/article-{$rec['id']}" title="{$rec['title']}">
-                                <?php if ($post['thumb']) $imgurl=$url_image.$post['thumb']; else $imgurl='/public/static/home/img/default.jpeg';?>
+                                <?php if ($rec['thumb']) $imgurl=$url_image.$rec['thumb']; else $imgurl='/public/static/home/img/default.jpeg';?>
                                 <img src="{$imgurl}" alt="{$rec['title']}"/>
                             </a>
                         </div>
