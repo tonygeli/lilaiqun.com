@@ -2881,7 +2881,7 @@ body.sign-show {
 	position: relative;
 	z-index: 9;
 	clear: both;
-	padding: 40px 30px;
+	padding: 10px 20px;
 	font-size: 12px;
 	line-height: 12px;
 	color: #999;
