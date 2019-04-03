@@ -1,0 +1,58 @@
+{include file="common/head"/}
+
+<!-- maincontent start here -->
+<section class="container">
+    <div class="content-wrap">
+        <div class="content">
+            <section class="hots" style="visibility: visible; /*animation-name: fadeInUp;*/">
+                <div class="section-title">
+                    <h3>人气推荐</h3>
+                </div>
+                <ul>
+                    {volist name="$recommends" id="rec"}
+                    <li>
+                        <div class="thumbnail">
+                            <a href="/article-{$rec['id']}" title="{$rec['title']}">
+                                <?php if ($rec['thumb']) $imgurl=$url_image.$rec['thumb']; else $imgurl='/public/static/home/img/default.jpeg';?>
+                                <img src="{$imgurl}" alt="{$rec['title']}"/>
+                            </a>
+                        </div>
+                        <h4><a href="/article-{$rec['id']}" title="{$rec['title']}">{$rec['title']}</a></h4>
+                        <p class="desc">{$rec['description']}</p>
+                    </li>
+                    {/volist}
+                </ul>
+            </section>
+
+            <div class="title">
+                <h3>最新发布</h3>
+                <div class="more"><a href="http://www.lilaiqun.com">感谢支持作者</a></div>
+            </div>
+
+            {volist name="$posts" id="post"}
+            <article class="excerpt excerpt-1">
+                <div class="focus thumb">
+                    <a href="/article-{$post['id']}" title="{$post['title']}">
+                        <?php if ($post['thumb']) $imgurl=$url_image.$post['thumb']; else $imgurl='/public/static/home/img/default.jpeg';?>
+                        <img src="{$imgurl}" alt="{$post['title']}">
+                    </a>
+                </div>
+                <header>
+                    <h2>
+                        <a href="/article-{$post['id']}" title="{$post['title']}">{$post['title']}</a>
+                    </h2>
+                    <p class="note">{$rec['description']}</p>
+                    <p class="meta">
+                        <a href="/category-{$catid}" rel="category">
+                            <?php echo $catName ?></a><span class="pvs"> |</span><time><?php echo substr($post['time'], 0, 10) ?></time><span class="pv">阅读({$post['hits']+100})</span><span class="pvtags"></span></p>
+                </header>
+            </article>
+            {/volist}
+            {$page}
+        </div>
+    </div>
+    {include file="common/sidebar"/}
+</section>
+
+
+{include file="common/footer"/}

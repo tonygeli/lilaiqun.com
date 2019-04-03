@@ -1,0 +1,36 @@
+{include file="common/head"/}
+<link rel="stylesheet" href="__STATIC__/editormd/editormd.min.css" />
+
+
+<!-- maincontent start here -->
+<section class="container">
+    <div class="content-wrap">
+        <div class="content">
+            <header class="article-header">
+                <h1 class="article-title"><a href="">{$info['title']}</a></h1>
+            </header>
+            <div id="content">
+                <textarea style="display:none;">
+                    {$info['content']}
+                </textarea>
+            </div>
+        </div>
+    </div>
+    {include file="common/sidebar"/}
+</section>
+<!-- maincontent end here -->
+{include file="common/footer"/}
+
+<script src='__STATIC__/editormd/editormd.min.js'></script>
+<script src='__STATIC__/editormd/lib/marked.min.js'></script>
+<script src='__STATIC__/editormd/lib/prettify.min.js'></script>
+<script src='__STATIC__/editormd/lib/raphael.min.js'></script>
+
+<script type="text/javascript">
+$(function() {
+    editormd.markdownToHTML("content", {//注意：这里是上面DIV的id
+        htmlDecode : "style,script,iframe",
+        emoji : true,
+    });
+});
+</script>
