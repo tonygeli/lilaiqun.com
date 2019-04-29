@@ -41,7 +41,7 @@ class Qiniu
     public function getBucketFileList($prefix='', $marker='', $limit = 20)
     {
         $bucketManager = new BucketManager($this->auth);
-        $delimiter = '/';
+        $delimiter = '';
         // 列举文件
         list($ret, $err) = $bucketManager->listFiles($this->bucket, $prefix, $marker, $limit, $delimiter);
         if ($err !== null) {

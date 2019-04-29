@@ -243,19 +243,13 @@ class Article extends Common
     public function imageList()
     {
         $qiniuSer = new Qiniu();
-        $arImg = $qiniuSer->getBucketFileList(input('prefix'), input('marker'), input('limit'));
-        $count = input('limit');
-        if (count($arImg['items']) == $count) {
-            $count++;
-        }
+        $prefix = input('prefix') ? input('prefix') : '';
+        $arImg = $qiniuSer->getBucketFileList($prefix, input('marker'), input('limit'));
         return $result = [
             'code' => 0,
             'msg' => '获取成功!',
             'data' => $arImg['items'],
-            'count' => $count,
             'marker' => $arImg['marker'],
-            'commonPrefixes' => $arImg['commonPrefixes'],
-            'rel'=>1
         ];
     }
 
