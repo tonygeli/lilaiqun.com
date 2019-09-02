@@ -73,12 +73,10 @@
 <!-- header start here -->
 <header class="header">
     <div class="container">
-        <h1 class="logo"><a href="http://www.lilaiqun.com">LILAIQUN</a></h1>
-
         <!-- mainmenu start here -->
         <ul class="site-nav site-navbar">
             <li class="menu-item menu-item-type-taxonomy menu-item-object-category{if condition="$controller eq 'index'"} current-menu-item{/if}">
-                <a href="{:url('home/index/index')}" title="LILAIQUN博客">首页</a>
+                <a href="{:url('home/index/index')}" title="互联网求职">首页</a>
             </li>
 
             {volist name="category" id="vo"}
@@ -97,7 +95,6 @@
             {/if}
             </li>
             {/volist}
-            <li class="navto-search"><a href="javascript:;" class="search-show active"><i class="fa fa-search"></i></a></li>
 
         </ul>
         <!-- mainmenu end here -->
@@ -106,10 +103,4 @@
     </div>
 </header>
 
-<div class="site-search">
-    <div class="container">
-        <form method="get" class="site-search-form" action=""><input class="search-input" name="s" type="text" placeholder="输入关键字" value=""><button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
-        </form>
-    </div>
-</div>
 <!-- header end here -->

@@ -255,7 +255,6 @@ body {
 	padding: 0;
 }
 .header {
-	height:65px;
 	/*margin-left: -280px;*/
 	/*margin-top: -99px;*/
 	/*height: 64px;*/
@@ -267,7 +266,7 @@ body {
 	right: 0;
 	z-index: 9;
 	background-color: #262627;
-	padding: 20px 0px 0px 0px;
+	padding: 10px 0px;
 	margin-bottom: 15px;
 	/*box-shadow: 0 1px 4px rgba(0,0,0,.05);*/
 	border-color: rgba(0, 0, 0, .08);

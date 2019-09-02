@@ -19,7 +19,7 @@ class Article extends Model
             'type' => 'title',
             'setup' => array (
                 'thumb' => '1',
-                'thumbPath' => 'http://images.lilaiqun.com/',
+//                'thumbPath' => 'http://images.lilaiqun.com/',
                 'size' => '55',
             ),
             'ispost' => 1,
@@ -27,13 +27,6 @@ class Article extends Model
             'listorder' => 2,
             'status' => 1,
             'issystem' => 1,
-        ),
-        'inputthumb' => array(
-            'field' => 'inputthumb',
-            'name' => '缩略图',
-            'required' => 0,
-            'type' => 'inputthumb',
-            'status' => 1
         ),
         'descriptino' => array (
             'id' => 4,
@@ -140,9 +133,9 @@ class Article extends Model
                 'maxlength' => 0,
                 'pattern' => 'defaul',
                 'errormsg' => '',
-                'class' => '',
+                'class' => 'content',
                 'type' => 'editor',
-                'setup' => 'array (\'edittype\' => \'editormd\',)',
+                'setup' => 'array (\'edittype\' => \'UEditor\',)',
                 'ispost' => 0,
                 'unpostgroup' => '',
                 'listorder' => 3,

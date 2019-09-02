@@ -10,9 +10,7 @@
                 <h1 class="article-title"><a href="">{$info['title']}</a></h1>
             </header>
             <div id="content">
-                <textarea style="display:none;">
                     {$info['content']}
-                </textarea>
             </div>
         </div>
     </div>
@@ -28,9 +26,9 @@
 
 <script type="text/javascript">
 $(function() {
-    editormd.markdownToHTML("content", {//注意：这里是上面DIV的id
-        htmlDecode : "style,script,iframe",
-        emoji : true,
-    });
+    // editormd.markdownToHTML("content", {//注意：这里是上面DIV的id
+    //     htmlDecode : "style,script,iframe",
+    //     emoji : true,
+    // });
 });
 </script>
