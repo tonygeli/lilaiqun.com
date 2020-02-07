@@ -1,6 +1,6 @@
 {include file="common/head"/}
-<link rel="stylesheet" href="__STATIC__/editormd/editormd.min.css" />
-
+<link rel="stylesheet" href="__STATIC__/ueditor/themes/default/css/ueditor.css" />
+<style type="text/css">td.code {padding:9.5px 0px!important;}</style>
 
 <!-- maincontent start here -->
 <section class="container">
@@ -19,16 +19,14 @@
 <!-- maincontent end here -->
 {include file="common/footer"/}
 
-<script src='__STATIC__/editormd/editormd.min.js'></script>
+<!--<script src='__STATIC__/editormd/editormd.min.js'></script>-->
+<script src='__STATIC__/ueditor/ueditor.parse.js'></script>
 <script src='__STATIC__/editormd/lib/marked.min.js'></script>
 <script src='__STATIC__/editormd/lib/prettify.min.js'></script>
 <script src='__STATIC__/editormd/lib/raphael.min.js'></script>
 
 <script type="text/javascript">
 $(function() {
-    // editormd.markdownToHTML("content", {//注意：这里是上面DIV的id
-    //     htmlDecode : "style,script,iframe",
-    //     emoji : true,
-    // });
+    uParse('#content', {rootPath:'./public/static/ueditor'});
 });
 </script>

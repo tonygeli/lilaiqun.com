@@ -160,10 +160,6 @@ class Article extends Common
     public function update() {
         if(request()->isPost()) {
             $data = input('post.');
-            // 输入缩略图
-            if ($data['inputthumb']) {
-                $data['thumb'] = $data['inputthumb'];
-            }
             if ($this->dao->update($data) !== false) {
                 return array('code' => 1, 'url' => url('index'), 'msg' => '修改成功!');
             } else {
